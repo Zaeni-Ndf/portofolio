@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhamad Zaeni Nadip — Web Developer / Systems Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bp-bg: #0c2340;
+      --bp-bg-deep: #081a30;
+      --bp-panel: #10305c;
+      --bp-panel-soft: #123869;
+      --bp-line: #3f6da8;
+      --bp-line-soft: rgba(63, 109, 168, 0.35);
+      --bp-cream: #f2ecda;
+      --bp-cream-dim: #c9d3e0;
+      --bp-amber: #4dd8e8;
+      --bp-muted: #7f9cc4;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --glow: 0 0 6px rgba(77, 216, 232, .75), 0 0 16px rgba(77, 216, 232, .4), 0 0 34px rgba(77, 216, 232, .2);
+      --glow-soft: 0 0 8px rgba(77, 216, 232, .5), 0 0 20px rgba(77, 216, 232, .22);
+    }
+
+    @keyframes neon-flicker {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      92% {
+        opacity: 1;
+      }
+
+      93% {
+        opacity: .55;
+      }
+
+      94% {
+        opacity: 1;
+      }
+
+      96% {
+        opacity: .7;
+      }
+
+      97% {
+        opacity: 1;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bp-bg);
+      color: var(--bp-cream);
+      font-family: var(--sans);
+    }
+
+    body {
+      background-color: var(--bp-bg);
+      position: relative;
+    }
+
+    #web-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+
+    header,
+    .hero,
+    .wrap,
+    .stats,
+    .section,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    ::selection {
+      background: var(--bp-amber);
+      color: var(--bp-bg-deep);
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ---------- Title block (header) ---------- */
+    header {
+      border-bottom: 1px solid var(--bp-line);
+      padding: 22px 0;
+      background: var(--bp-bg-deep);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .titleblock {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .tb-left {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .14em;
+      color: var(--bp-muted);
+      text-transform: uppercase;
+    }
+
+    .tb-left b {
+      color: var(--bp-cream);
+    }
+
+    .tb-right {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--bp-muted);
+      text-align: right;
+      letter-spacing: .08em;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 96px 0 80px;
+      position: relative;
+    }
+
+    .hero .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--bp-amber);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: var(--glow);
+      animation: neon-flicker 6s infinite;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 26px;
+      height: 1px;
+      background: var(--bp-amber);
+      display: inline-block;
+      box-shadow: var(--glow-soft);
+    }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.05;
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 span {
+      color: var(--bp-muted);
+      font-weight: 400;
+    }
+
+    .hero p.lede {
+      max-width: 640px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--bp-cream-dim);
+      margin: 0 0 34px;
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 7px 14px;
+      border: 1px solid var(--bp-line);
+      border-radius: 2px;
+      color: var(--bp-muted);
+      letter-spacing: .03em;
+    }
+
+    /* ---------- Stat strip ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--bp-line);
+      border-bottom: 1px solid var(--bp-line);
+      border-left: 1px solid var(--bp-line);
+      border-right: 1px solid var(--bp-line);
+    }
+
+    .stat {
+      padding: 26px 24px;
+      border-right: 1px solid var(--bp-line);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat .num {
+      font-family: var(--mono);
+      font-size: 30px;
+      color: var(--bp-amber);
+      font-weight: 600;
+      text-shadow: var(--glow);
+    }
+
+    .stat .lbl {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--bp-muted);
+      margin-top: 6px;
+    }
+
+    /* ---------- Section heading ---------- */
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-head {
+      margin-bottom: 44px;
+    }
+
+    .section-head .code {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--bp-amber);
+      letter-spacing: .14em;
+      text-shadow: var(--glow-soft);
+    }
+
+    .section-head h2 {
+      font-family: var(--mono);
+      font-size: clamp(24px, 3.4vw, 32px);
+      margin: 8px 0 0;
+      font-weight: 600;
+    }
+
+    .section-head p {
+      color: var(--bp-muted);
+      margin-top: 10px;
+      max-width: 560px;
+      line-height: 1.6;
+      font-size: 14.5px;
+    }
+
+    .group {
+      margin-bottom: 58px;
+    }
+
+    .group-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--bp-muted);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--bp-line-soft);
+    }
+
+    /* ---------- Project panel ---------- */
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 760px) {
+      .panels {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .panel {
+      border: 1px solid var(--bp-line);
+      background: var(--bp-panel);
+      position: relative;
+      padding: 22px 22px 20px;
+      border-radius: 2px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-3px);
+      border-color: var(--bp-amber);
+      background: var(--bp-panel-soft);
+      box-shadow: 0 0 0 1px var(--bp-amber), 0 0 28px rgba(77, 216, 232, .28), 0 0 60px rgba(77, 216, 232, .12);
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .drawing-no {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--bp-muted);
+      letter-spacing: .06em;
+    }
+
+    .status {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #7fd8a0;
+      border: 1px solid rgba(127, 216, 160, .4);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .panel h3 {
+      font-family: var(--mono);
+      font-size: 19px;
+      margin: 0 0 6px;
+      font-weight: 600;
+    }
+
+    .panel .url {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--bp-amber);
+      word-break: break-all;
+      margin-bottom: 12px;
+      display: block;
+      text-decoration: none;
+      text-shadow: var(--glow-soft);
+    }
+
+    .panel .url:hover {
+      text-decoration: underline;
+    }
+
+    .panel p.desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--bp-cream-dim);
+      margin: 0 0 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--bp-muted);
+      border: 1px dashed var(--bp-line);
+      padding: 4px 9px;
+      border-radius: 2px;
+    }
+
+    /* ---------- Capabilities ---------- */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--bp-line);
+      border: 1px solid var(--bp-line);
+    }
+
+    @media (max-width:760px) {
+      .cap-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cap {
+      background: var(--bp-bg);
+      padding: 26px 24px;
+    }
+
+    .cap .idx {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--bp-amber);
+      text-shadow: var(--glow-soft);
+    }
+
+    .cap h4 {
+      font-family: var(--mono);
+      font-size: 15.5px;
+      margin: 10px 0 8px;
+    }
+
+    .cap p {
+      font-size: 13.5px;
+      color: var(--bp-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid var(--bp-line);
+      padding: 48px 0 40px;
+    }
+
+    .foot-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .foot-row .brand {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--bp-muted);
+    }
+
+    .foot-row .brand b {
+      color: var(--bp-cream);
+    }
+
+    .foot-links {
+      display: flex;
+      gap: 22px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--bp-muted);
+    }
+
+    .foot-links a:hover {
+      color: var(--bp-amber);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .panel {
+        transition: none;
+      }
+
+      .eyebrow {
+        animation: none;
+      }
+    }
+
+    a:focus-visible,
+    .panel:focus-visible {
+      outline: 2px solid var(--bp-amber);
+      outline-offset: 3px;
+      box-shadow: var(--glow);
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="web-bg" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="wrap titleblock">
+      <div class="tb-left">DOC&nbsp;&nbsp;PORTOFOLIO-01&nbsp;&nbsp;·&nbsp;&nbsp;<b>MUHAMAD ZAENI NADIP</b>&nbsp;/ WEB
+        DEVELOPER</div>
+      <div class="tb-right" id="live-clock">--<br>STATUS: LIVE SYSTEMS</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">System Build Log</div>
+      <h1>Saya membangun sistem<br><span>bukan cuma tampilan.</span></h1>
+      <p class="lede">
+        Web developer yang mengerjakan aplikasi bisnis dari ujung ke ujung — mulai dari skema
+        database, panel admin, integrasi WhatsApp/email otomatis, sampai konfigurasi hosting
+        dan domain. Delapan sistem di bawah ini sedang berjalan production hari ini.
+      </p>
+      <div class="stack-pills">
+        <span class="pill">Laravel 12</span>
+        <span class="pill">CodeIgniter 4</span>
+        <span class="pill">Filament</span>
+        <span class="pill">Inertia + Vue 3</span>
+        <span class="pill">Tailwind CSS</span>
+        <span class="pill">cPanel / Rumahweb</span>
+        <span class="pill">Starsender WA API</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat">
+        <div class="num">8</div>
+        <div class="lbl">Sistem Live</div>
+      </div>
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="lbl">Sektor Industri</div>
+      </div>
+      <div class="stat">
+        <div class="num">2</div>
+        <div class="lbl">Framework Utama</div>
+      </div>
+      <div class="stat">
+        <div class="num">01</div>
+        <div class="lbl">Proyek Berjalan: Riksa Uji</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="code">§ 01 — DEPLOYED SYSTEMS</div>
+        <h2>Website & sistem yang sudah dikembangkan</h2>
+        <p>Dikelompokkan berdasarkan sektor industri klien — training &amp; K3, jasa keuangan, dan pendidikan anak.</p>
+      </div>
+
+      <!-- GROUP: Training & K3 -->
+      <div class="group">
+        <div class="group-label">Training, HR &amp; K3 Compliance</div>
+        <div class="panels">
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-01 / TRAINING-CMS</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>LenteraSafety</h3>
+            <a class="url" href="https://lenterasafety.co.id/" target="_blank" rel="noopener">lenterasafety.co.id</a>
+            <p class="desc">
+              Platform resmi PJK3 untuk pelatihan &amp; sertifikasi K3 (Kemenaker RI dan BNSP).
+              Menangani jadwal public training yang tampil otomatis per bulan, pendaftaran
+              in-house training, portal login peserta, serta modul berita &amp; artikel.
+            </p>
+            <div class="tags">
+              <span class="tag">CodeIgniter 4</span>
+              <span class="tag">cPanel Rumahweb</span>
+              <span class="tag">Google Search Console</span>
+              <span class="tag">SEO Sitemap</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-02 / TRAINING-CMS</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>Q.One Consulting</h3>
+            <a class="url" href="https://qoneconsulting.co.id/" target="_blank" rel="noopener">qoneconsulting.co.id</a>
+            <p class="desc">
+              Company profile &amp; sistem jadwal training untuk konsultan HR management —
+              mencakup public training (kategori Certification, People Development,
+              Organization Development, QHSE) lengkap dengan filter periode dan harga per sesi.
+            </p>
+            <div class="tags">
+              <span class="tag">Company Profile</span>
+              <span class="tag">Training Scheduler</span>
+              <span class="tag">DNS &amp; Hosting Setup</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GROUP: Finance -->
+      <div class="group">
+        <div class="group-label">Sekuritas &amp; Platform Investasi</div>
+        <div class="panels">
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-03 / CORP-SITE</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>Reliance Sekuritas</h3>
+            <a class="url" href="https://reliancesekuritas.com/" target="_blank"
+              rel="noopener">reliancesekuritas.com</a>
+            <p class="desc">
+              Website korporat untuk PT Reliance Sekuritas Indonesia Tbk (RELI) — perusahaan
+              efek yang tercatat di Bursa Efek Indonesia sejak 2005. Menyajikan info perusahaan,
+              layanan brokerage, serta dokumen laporan keuangan &amp; keterbukaan informasi publik.
+            </p>
+            <div class="tags">
+              <span class="tag">Corporate Website</span>
+              <span class="tag">Investor Relations</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-04 / TRADING-APP</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>Relitrade</h3>
+            <a class="url" href="https://relitrade.com/" target="_blank" rel="noopener">relitrade.com</a>
+            <p class="desc">
+              Web platform untuk kebutuhan online trading di bawah grup Reliance —
+              mendukung akses nasabah ke layanan transaksi saham secara digital.
+            </p>
+            <div class="tags">
+              <span class="tag">Web Platform</span>
+              <span class="tag">Client Portal</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-05 / INVEST-APP</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>Reliance Invest</h3>
+            <a class="url" href="https://www.reliinvest.com/home" target="_blank" rel="noopener">reliinvest.com</a>
+            <p class="desc">
+              Web app portal investasi untuk nasabah grup Reliance — akses akun, login,
+              dan manajemen produk investasi dalam satu platform digital.
+            </p>
+            <div class="tags">
+              <span class="tag">Web App</span>
+              <span class="tag">Client Portal</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GROUP: Education -->
+      <div class="group">
+        <div class="group-label">Pendidikan Anak</div>
+        <div class="panels">
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-06 / SCHOOL-CMS</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>Numa Montessori</h3>
+            <a class="url" href="https://numamontessori.com/" target="_blank" rel="noopener">numamontessori.com</a>
+            <p class="desc">
+              Website profil Montessori Studio pertama di Samarinda — memuat program &amp;
+              area belajar, jadwal kelas, paket harga, blog artikel, galeri kegiatan, serta
+              sistem login untuk orang tua/pengelola.
+            </p>
+            <div class="tags">
+              <span class="tag">School Profile CMS</span>
+              <span class="tag">Blog &amp; Gallery</span>
+              <span class="tag">Booking &amp; Pricing</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GROUP: Mining Ops -->
+      <div class="group">
+        <div class="group-label">Operasional Tambang &amp; Point of Sale</div>
+        <div class="panels">
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-07 / OPS-SYSTEM</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>HIMOS</h3>
+            <a class="url" href="https://himos.web.id/" target="_blank" rel="noopener">himos.web.id</a>
+            <p class="desc">
+              Hillcon Mine Operation System — sistem pemantauan operasional tambang yang
+              bisa diakses lewat browser maupun aplikasi mobile (APK &amp; App Store), untuk
+              mendukung pencatatan dan pelaporan aktivitas operasional di lapangan.
+            </p>
+            <div class="tags">
+              <span class="tag">Web + Mobile App</span>
+              <span class="tag">Mining Operations</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-top">
+              <span class="drawing-no">SYS-08 / POS-SKU</span>
+              <span class="status">● Live</span>
+            </div>
+            <h3>SKU — POS System</h3>
+            <a class="url" href="https://himos.web.id/pos_sku/auth" target="_blank"
+              rel="noopener">himos.web.id/pos_sku</a>
+            <p class="desc">
+              Modul point-of-sale &amp; manajemen SKU dalam ekosistem yang sama — dilengkapi
+              sistem autentikasi login dan pendaftaran akun untuk pencatatan transaksi
+              dan stok barang.
+            </p>
+            <div class="tags">
+              <span class="tag">POS System</span>
+              <span class="tag">Auth &amp; Registration</span>
+              <span class="tag">Inventory</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="code">§ 02 — CAPABILITIES</div>
+        <h2>Yang saya kerjakan di balik layar</h2>
+      </div>
+      <div class="cap-grid">
+        <div class="cap">
+          <div class="idx">A</div>
+          <h4>Full-stack Web System</h4>
+          <p>Merancang skema database, panel admin, dan alur bisnis end-to-end memakai Laravel/Filament dan CodeIgniter
+            4.</p>
+        </div>
+        <div class="cap">
+          <div class="idx">B</div>
+          <h4>Hosting &amp; Infrastruktur</h4>
+          <p>Konfigurasi domain, DNS, SSL, dan deployment di shared cPanel (Rumahweb/Niagahoster) termasuk koneksi
+            multi-database.</p>
+        </div>
+        <div class="cap">
+          <div class="idx">C</div>
+          <h4>Automasi Komunikasi</h4>
+          <p>Integrasi WhatsApp API dan email otomatis untuk penawaran, notifikasi, dan koordinasi tim Account
+            Executive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-row">
+      <div class="brand"><b>Muhamad Zaeni Nadip</b> — Web Developer &amp; Systems Builder</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var bulanID = ['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'];
+      var clockEl = document.getElementById('live-clock');
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function tickClock() {
+        var now = new Date();
+        var tanggal = pad(now.getDate()) + ' ' + bulanID[now.getMonth()] + ' ' + now.getFullYear();
+        var jam = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+        clockEl.innerHTML = tanggal + ' &middot; ' + jam + ' WIB<br>STATUS: LIVE SYSTEMS';
+      }
+
+      tickClock();
+      setInterval(tickClock, 1000);
+    })();
+
+    (function () {
+      var canvas = document.getElementById('web-bg');
+      var ctx = canvas.getContext('2d');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var W, H, dpr;
+      var nodes = [];
+      var mouse = { x: -9999, y: -9999, active: false };
+      var LINK_DIST = 150;
+      var MOUSE_DIST = 220;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var count = Math.round((W * H) / 16000);
+        count = Math.max(30, Math.min(count, 140));
+        nodes = [];
+        for (var i = 0; i < count; i++) {
+          nodes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.18,
+            vy: (Math.random() - 0.5) * 0.18
+          });
+        }
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (var i = 0; i < nodes.length; i++) {
+          var n = nodes[i];
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > W) n.vx *= -1;
+          if (n.y < 0 || n.y > H) n.vy *= -1;
+          n.x = Math.max(0, Math.min(W, n.x));
+          n.y = Math.max(0, Math.min(H, n.y));
+
+          if (mouse.active) {
+            var dx = n.x - mouse.x, dy = n.y - mouse.y;
+            var d = Math.sqrt(dx * dx + dy * dy);
+            if (d < MOUSE_DIST && d > 0.001) {
+              var force = (1 - d / MOUSE_DIST) * 0.6;
+              n.x += (dx / d) * force;
+              n.y += (dy / d) * force;
+            }
+          }
+        }
+
+        // strands between nearby nodes
+        for (var a = 0; a < nodes.length; a++) {
+          for (var b = a + 1; b < nodes.length; b++) {
+            var dx2 = nodes[a].x - nodes[b].x, dy2 = nodes[a].y - nodes[b].y;
+            var dist = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            if (dist < LINK_DIST) {
+              var op = (1 - dist / LINK_DIST) * 0.35;
+              ctx.strokeStyle = 'rgba(77,216,232,' + op.toFixed(3) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(nodes[a].x, nodes[a].y);
+              ctx.lineTo(nodes[b].x, nodes[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // strands reaching toward the cursor, like a web pulled taut
+        if (mouse.active) {
+          for (var m = 0; m < nodes.length; m++) {
+            var mdx = nodes[m].x - mouse.x, mdy = nodes[m].y - mouse.y;
+            var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (mdist < MOUSE_DIST) {
+              var mop = (1 - mdist / MOUSE_DIST) * 0.55;
+              ctx.strokeStyle = 'rgba(77,216,232,' + mop.toFixed(3) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(nodes[m].x, nodes[m].y);
+              ctx.lineTo(mouse.x, mouse.y);
+              ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(77,216,232,0.9)';
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // node dots
+        ctx.fillStyle = 'rgba(201,211,224,0.55)';
+        for (var k = 0; k < nodes.length; k++) {
+          ctx.beginPath();
+          ctx.arc(nodes[k].x, nodes[k].y, 1.4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (!reduceMotion) requestAnimationFrame(step);
+      }
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', function (e) {
+        mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true;
+      });
+      window.addEventListener('mouseleave', function () { mouse.active = false; });
+      window.addEventListener('touchmove', function (e) {
+        if (e.touches && e.touches[0]) {
+          mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; mouse.active = true;
+        }
+      }, { passive: true });
+      window.addEventListener('touchend', function () { mouse.active = false; });
+
+      resize();
+      if (!reduceMotion) {
+        requestAnimationFrame(step);
+      } else {
+        step();
+      }
+    })();
+  </script>
+</body>
+
+</html>
